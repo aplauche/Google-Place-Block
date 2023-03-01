@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+  "apiVersion": 2,
+  "name": "fsdgpb/google-place",
+  "title": "Place Information",
+  "category": "text",
+  "description": "Adds an information box for a google place listing via API",
+  "textdomain": "fsdgpb",
+  "attributes": {
+    "lat": {
+      "type": "string"
+    },
+    "lng": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "align": ["wide"]
+  },
+  "editorScript": "file:./index.js",
+  "script": "file:./frontend.js",
+  "style": "file:./index.css"
+}

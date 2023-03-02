@@ -5,17 +5,19 @@ function fetch_google_place_data($req) {
 
   $lat = $req["lat"];
   $lng = $req["lng"];
-  $placeString = $req["placeString"];
+  $placeId = $req["placeId"];
 
   $data_encryption = new FSDHH\Data_Encryption();
   $googleKey = $data_encryption->decrypt(get_option( 'google_api_key' ));
 
-  if(!empty($googleKey)){
+  if(empty($googleKey)){
+    return new WP_Error( 'error', 'Please enter a google API key in settings to use this feature', array( 'status' => 403 ) );
+  }
 
     $curl = curl_init();
   
     curl_setopt_array($curl, [
-      CURLOPT_URL => "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={$placeString}&inputtype=textquery&locationbias=circle%3A2000%40{$lat}%2C{$lng}&fields=formatted_address%2Cname%2Cplace_id%2Cgeometry%2Crating%2Cphotos&key={$googleKey}",
+      CURLOPT_URL => "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={$placeId}&inputtype=textquery&locationbias=circle%3A2000%40{$lat}%2C{$lng}&fields=formatted_address%2Cprice_level%2Cname%2Cplace_id%2Cgeometry%2Crating%2Cphotos&key={$googleKey}",
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
       CURLOPT_MAXREDIRS => 10,
@@ -38,12 +40,4 @@ function fetch_google_place_data($req) {
     
       return $res;
     }
-
-
-  }
-
-
-  return new WP_Error( 'error', 'Please enter a google API key in settings to use this feature', array( 'status' => 403 ) );
-
-
 }

@@ -30,26 +30,24 @@ foreach($allFiles as $filename) {
 }
 
 // Hooks
-// add_action('init', 'fsdgpb_register_assets');
-// add_action('init', 'fsdgpb_register_blocks');
-// add_action('init', 'fsdgpb_happy_hour_post_type');
-// add_action('admin_menu', 'fsdgpb_register_my_api_keys_page');
+add_action('init', 'fsdgpb_register_blocks');
+add_action('admin_menu', 'fsdgpb_register_my_api_keys_page');
 
 
 // Register Blocks
 function fsdgpb_register_blocks(){
-  register_block_type( FSDGPB_DIR . '/build/blocks/happy-hour', array(
-    'render_callback' => 'fsdgpb_happy_hour_render'
+  register_block_type( FSDGPB_DIR . '/build/blocks/google-place', array(
+    'render_callback' => 'fsdgpb_render'
   ) );
 }
 
 // API Endpoint
 
-// add_action('rest_api_init', function () {
-//   register_rest_route( 'fsdgpb/v1', '/fetch-google-data', array(
-//       'methods' => 'POST',
-//       'callback' => 'fetch_google_place_data',
-//       'permission_callback' => '__return_true'
-//   ));
-// });
+add_action('rest_api_init', function () {
+  register_rest_route( 'fsdgpb/v1', '/fetch-google-data', array(
+      'methods' => 'POST',
+      'callback' => 'fetch_google_place_data',
+      'permission_callback' => '__return_true'
+  ));
+});
 

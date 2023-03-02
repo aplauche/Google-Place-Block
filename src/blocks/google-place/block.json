@@ -8,10 +8,24 @@
   "textdomain": "fsdgpb",
   "attributes": {
     "lat": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "lng": {
-      "type": "string"
+      "type": "string",
+      "default": ""
+    },
+    "rating": {
+      "type": "integer",
+      "default": 0
+    },
+    "price": {
+      "type": "integer",
+      "default": 0
+    },
+    "address": {
+      "type": "string",
+      "default": ""
     }
   },
   "supports": {
